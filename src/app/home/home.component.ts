@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { WebService} from '../services/web.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CommonService} from '../services/common.service';
+import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {PhotoDetailsComponent} from '../modals/photo-details/photo-details.component';
+import {DataParserService} from '../services/data-parser.service';
+
 
 
 @Component({
@@ -16,9 +20,12 @@ export class HomeComponent implements OnInit {
   searchText: string;
   perPage = 30;
   recentSearch = [];
+  waitLoader = false;
 
   constructor(private webServices: WebService,
-              private commonService: CommonService) { }
+              private commonService: CommonService,
+              private modalService: NgbModal,
+              private dataParser: DataParserService) { }
 
   ngOnInit() {
     document.body.style.background = '#000';
@@ -45,14 +52,16 @@ export class HomeComponent implements OnInit {
   }
 
   getPhotos(searchText, pageNumber, perPage) {
+      this.waitLoader = true;
       const requestData = {
         'search_text' : searchText,
         'page_number' : pageNumber,
         'per_page' : perPage
       };
-      this.webServices.getFlickerPhotos(requestData).subscribe(data => {
-        const Data  = data.photos.photo;
-        Data.forEach( (photo) => {
+      this.webServices.getFlickerPhotos(requestData).subscribe(response => {
+        this.waitLoader = false
+        let parsedPhotos = this.dataParser.prasePhotos(response);
+        parsedPhotos.forEach((photo) => {
           this.photos.push(photo);
         });
     });
@@ -63,6 +72,11 @@ export class HomeComponent implements OnInit {
   onScroll() {
     this.pageNumber++;
     this.getPhotos(this.searchText, this.pageNumber, this.perPage);
+  }
+
+  getPhotoInfo(photo, e) {
+    const modalRef = this.modalService.open(PhotoDetailsComponent, { size: 'lg', centered: true });
+    modalRef.componentInstance.photo = photo;
   }
 
 }

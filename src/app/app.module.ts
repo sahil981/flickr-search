@@ -8,7 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import {WebService} from './services/web.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { CookieService } from 'ngx-cookie-service';
+import { PhotoDetailsComponent } from './modals/photo-details/photo-details.component';
 
 
 
@@ -16,16 +19,19 @@ import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PhotoDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
-  ],
-  providers: [WebService,CookieService],
+    InfiniteScrollModule,
+    NgbModule.forRoot(),
+],
+  providers: [WebService, CookieService],
+  entryComponents: [PhotoDetailsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

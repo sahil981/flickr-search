@@ -22,4 +22,13 @@ export class WebService {
     return this.http.get<any>(`${environment.BASE_URL}`, {params: params} );
   }
 
+  getPhotoInfo(requestData) {
+    const params = new HttpParams().set('api_key' , environment.API_KEY)
+      .set('photo_id', requestData.photo_id)
+      .set('format', 'json')
+      .set('method', 'flickr.photos.getInfo')
+      .set('nojsoncallback', '1');
+    return this.http.get<any>(`${environment.BASE_URL}`, {params: params} );
+  }
+
 }

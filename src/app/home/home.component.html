@@ -17,26 +17,32 @@
       <img width="150px" src="assets/images/Flickr_logo.png">
     </div>
   </section>
-  <div class="text-center" style="z-index: 999; position: -webkit-sticky;
-  position: sticky; top: 0;">
-    <form (ngSubmit)="search()" [formGroup]="searchForm">
+  <div class="recent-search-div">
       <span class="recent-search chip" *ngFor="let search of recentSearch | slice:0:5;">
         <span (click)="recentSearchs(search)"  >{{search}}</span>
         <span class="closebtn" (click) = "remove(search)">&times;</span>
       </span>
+  </div>
+  <div class="text-center" style="z-index: 999; position: -webkit-sticky;
+  position: sticky; top: 0;">
+    <form (ngSubmit)="search()" [formGroup]="searchForm">
+
       <br>
-      <input type="search" results=5 class="input-field" formControlName="searchText" placeholder="Search">
+      <input  class="input-field" formControlName="searchText" placeholder="Search">
       <!--<datalist id="search">-->
       <!--<option *ngFor="let search of recentSearch" value={{search}}>-->
       <!--</datalist>-->
     </form>
   </div>
 
-  <div>
-    <div class="col-md-12">
-      <div *ngFor="let photo of photos" class="col-md-4 " style="    margin: 20px 0px;">
-        <img class="flickr-image zoom" [src]="photo.url_m">
+  <div class="">
+    <div class="row row-margin">
+      <div *ngFor="let photo of photos" class="col-md-4 col-12 " style="    margin: 20px 0px;">
+        <img (click)="getPhotoInfo(photo,$event)"  class="flickr-image zoom" [src]="photo.url_m">
       </div>
+    </div>
+    <div *ngIf="waitLoader" class="text-center ">
+      <img width="50px" src="assets/images/loading.gif">
     </div>
   </div>
 

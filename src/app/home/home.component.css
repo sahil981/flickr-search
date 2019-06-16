@@ -15,16 +15,20 @@
 .input-field{
   height: 49px;
   width: 50%;
-  /* border-radius: 50px; */
   letter-spacing: 1px;
   text-align: center;
   outline: none;
-  margin-top: 20px;
-  border-bottom: solid 1px #0063db;
+  margin-top: 0px;
   border-top: none;
   border-right: none;
   border-left: none;
   font-size: 30px;
+  border-radius: 50px;
+  background-image: url("/assets/images/search.png");
+  background-size: 40px;
+  background-position-x: 98%;
+  background-position-y: 5px;
+  background-repeat: no-repeat;
 }
 .search-btn{
   margin-left: 15px;
@@ -43,11 +47,23 @@
 .zoom:hover{
   transform: scale(1.1);
   z-index: 999;
+  box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 .recent-search{
   color: #000;
+  width: 100%;
+  overflow-x: scroll;
 }
+.recent-search-div{
+  width: 100%;
+  overflow: scroll;
+  /*overflow-x: hidden;*/
+  text-align: center;
+  overflow-x: hidden;
+
+}
+
 .chip {
   padding: 3px 10px;
   height: 16px;
@@ -68,6 +84,22 @@
 
 .closebtn:hover {
   color: #000;
+}
+
+.row-margin{
+  margin: 50px;
+}
+@media screen and (min-device-width: 320px) and (max-device-width: 767px) {
+  .input-field{
+    width: 80%;
+  }
+  .zoom:hover{
+    transform: scale(0.98);
+  }
+  .row-margin{
+    margin: 0px;
+  }
+
 }
 
 
