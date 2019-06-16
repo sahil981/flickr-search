@@ -1,6 +1,5 @@
 .search-section{
   height: 20vh;
-  /*background: url("/assets/images/bg.jpg") ;*/
   background: #000;
   display: flex;
   justify-content: center;
@@ -12,6 +11,7 @@
   width: 100%;
   text-align: center;
 }
+
 .input-field{
   height: 49px;
   width: 50%;
@@ -24,31 +24,15 @@
   border-left: none;
   font-size: 30px;
   border-radius: 50px;
-  /* background-image: url(/assets/images/search.png); */
-
   background-position-y: 5px;
-  border-top-right-radius: 0px !important;
-  border-bottom-right-radius: 0px;
+  margin: 10px 0;
+
 }
 .search-btn{
-  background-image: url(/assets/images/search.png);
-  width: 53px;
-  height: 49px;
-  position: absolute;
-  background-color: #fff;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  background-size: 40px;
-  background-repeat: no-repeat;
-  -ms-background-position-y: 5px;
-  background-position-y: 3px;
-  background-position-x: 5px;
-  border: 5px;
-  border: 2px #fff solid;
-  outline: none;
-
-
-}
+  background: #f54e82;
+  border: #f54e82 1px solid;
+  font-weight: bold;
+ }
 
 .flickr-image{
   width: 100%;
@@ -108,6 +92,7 @@
 @media screen and (min-device-width: 320px) and (max-device-width: 767px) {
   .input-field{
     width: 80%;
+    font-size: 24px;
   }
   .zoom:hover{
     transform: scale(0.98);

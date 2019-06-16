@@ -14,3 +14,9 @@
   overflow: scroll;
   overflow-x: hidden;
 }
+.close{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  outline: none;
+}

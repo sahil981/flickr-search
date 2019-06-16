@@ -26,13 +26,8 @@
   <div class="text-center" style="z-index: 999; position: -webkit-sticky;
   position: sticky; top: 0;">
     <form (ngSubmit)="search()" [formGroup]="searchForm">
-
-      <br>
-      <input  class="input-field" formControlName="searchText" placeholder="Search"><button class="search-btn"></button>
-
-      <!--<datalist id="search">-->
-      <!--<option *ngFor="let search of recentSearch" value={{search}}>-->
-      <!--</datalist>-->
+      <input  class="input-field" formControlName="searchText" placeholder="Search Flickr.com "><br>
+      <button class="btn btn-primary search-btn">Search</button>
     </form>
 
   </div>

@@ -2,6 +2,9 @@
 <div role="document" class="modal-dialog">
   <div class="modal-content">
     <div class="modal-body">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div class="row">
         <div class="col-md-8 col-12">
           <img style="width: 100%" [src]="photo.url_h">

@@ -15,9 +15,12 @@ export class CommonService {
     if (this.cookieService.get('search_history')) {
       this.cookieData = JSON.parse(this.cookieService.get('search_history'));
     }
-    this.cookieData.unshift(text);
-    this.cookieService.set( 'search_history', JSON.stringify(this.cookieData));
-    return this.cookieData;
+    if (!this.cookieData.includes(text)) {
+      this.cookieData.unshift(text);
+      this.cookieService.set( 'search_history', JSON.stringify(this.cookieData));
+      return this.cookieData;
+    }
+    return;
   }
 
   //  getting data from cookies by passing key to it
