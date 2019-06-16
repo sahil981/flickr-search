@@ -8,7 +8,7 @@ import {WebService} from '../../services/web.service';
 })
 export class PhotoDetailsComponent implements OnInit {
   @Input() photo;
-  photoInfo = [];
+  photoInfo: any = [];
   constructor(private webservice: WebService) { }
 
   ngOnInit() {
