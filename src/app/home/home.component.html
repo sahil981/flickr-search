@@ -1,0 +1,43 @@
+
+<!--<nav class="navbar navbar-default">-->
+  <!--<div class="container-fluid">-->
+    <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+      <!--<form class="navbar-form navbar-left">-->
+        <!--<div class="form-group">-->
+          <!--<input type="text" class="form-control" placeholder="Search">-->
+        <!--</div>-->
+        <!--<button type="submit" class="btn btn-default">Submit</button>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</nav>-->
+<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [scrollWindow]="false" style="height: 100vh; overflow: scroll">
+  <section class="search-section">
+    <div class="search-container">
+      <img width="150px" src="assets/images/Flickr_logo.png">
+    </div>
+  </section>
+  <div class="text-center" style="z-index: 999; position: -webkit-sticky;
+  position: sticky; top: 0;">
+    <form (ngSubmit)="search()" [formGroup]="searchForm">
+      <span class="recent-search chip" *ngFor="let search of recentSearch | slice:0:5;">
+        <span (click)="recentSearchs(search)"  >{{search}}</span>
+        <span class="closebtn" (click) = "remove(search)">&times;</span>
+      </span>
+      <br>
+      <input type="search" results=5 class="input-field" formControlName="searchText" placeholder="Search">
+      <!--<datalist id="search">-->
+      <!--<option *ngFor="let search of recentSearch" value={{search}}>-->
+      <!--</datalist>-->
+    </form>
+  </div>
+
+  <div>
+    <div class="col-md-12">
+      <div *ngFor="let photo of photos" class="col-md-4 " style="    margin: 20px 0px;">
+        <img class="flickr-image zoom" [src]="photo.url_m">
+      </div>
+    </div>
+  </div>
+
+</div>
