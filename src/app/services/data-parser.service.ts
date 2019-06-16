@@ -7,8 +7,9 @@ export class DataParserService {
 
   constructor() { }
 
+  // receive response from HTTP request, and filter out data with missing fields / irrelevant data
   prasePhotos(response) {
-    let responseData = []
+    const responseData = []
     if (response.stat === 'ok') {
         if (response.photos.photo.length) {
            response.photos.photo.forEach( photo => {
@@ -22,7 +23,7 @@ export class DataParserService {
           alert('No Result Found');
         }
     } else {
-      alert('asd');
+      alert('Something went wrong');
     }
   }
 

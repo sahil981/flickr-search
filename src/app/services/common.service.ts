@@ -9,6 +9,8 @@ export class CommonService {
   private cookieData = [];
   constructor(private cookieService: CookieService) { }
 
+
+  // Storedata in Cookies as key value pair, After converting to string
   storeDataInCookies(text) {
     if (this.cookieService.get('search_history')) {
       this.cookieData = JSON.parse(this.cookieService.get('search_history'));
@@ -18,12 +20,14 @@ export class CommonService {
     return this.cookieData;
   }
 
+  //  getting data from cookies by passing key to it
   getDataFromCookies(key) {
     if (this.cookieService.get(key)) {
       return JSON.parse(this.cookieService.get(key));
     }
   }
 
+  // removes a search keyword from cookies
   removeDataFromCookies(text) {
     if (this.cookieService.get('search_history')) {
       this.cookieData = JSON.parse(this.cookieService.get('search_history'));

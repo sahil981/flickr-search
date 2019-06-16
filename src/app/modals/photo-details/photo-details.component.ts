@@ -12,18 +12,17 @@ export class PhotoDetailsComponent implements OnInit {
   constructor(private webservice: WebService) { }
 
   ngOnInit() {
-    console.log(this.photo);
     this.getPhotoInfo();
   }
 
-  getPhotoInfo(){
+  // Call the Flickr API for Photos information
+  getPhotoInfo() {
     const requestData = {
       'photo_id' : this.photo.id
     }
     this.webservice.getPhotoInfo(requestData).subscribe(data => {
-        if( data.stat === 'ok') {
-          this.photoInfo = data.photo
-          console.log(this.photoInfo);
+        if ( data.stat === 'ok') {
+          this.photoInfo = data.photo;
         }
     });
 

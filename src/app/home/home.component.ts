@@ -14,7 +14,7 @@ import {DataParserService} from '../services/data-parser.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  photos = [];
+  photos = []; // Photos object for populating in HTML
   pageNumber =  1;
   searchForm: FormGroup;
   searchText: string;
@@ -22,10 +22,10 @@ export class HomeComponent implements OnInit {
   recentSearch = [];
   waitLoader = false;
 
-  constructor(private webServices: WebService,
-              private commonService: CommonService,
+  constructor(private webServices: WebService, // WebServices Handles HTTP request
+              private commonService: CommonService, // Service that contains common function that can be used in any component
               private modalService: NgbModal,
-              private dataParser: DataParserService) { }
+              private dataParser: DataParserService) { }  // Dataparse services that validated incoming data from the API
 
   ngOnInit() {
     document.body.style.background = '#000';
@@ -35,23 +35,35 @@ export class HomeComponent implements OnInit {
     this.recentSearch = this.commonService.getDataFromCookies('search_history');
   }
 
+  // Search Function which store data in the cookies and call Flickr API
   search() {
     this.photos = [];
-    this.recentSearch = this.commonService.storeDataInCookies(this.searchForm.value.searchText);
+    if (this.searchForm.value.searchText){
+      this.commonService.storeDataInCookies(this.searchForm.value.searchText);
+    }
+    this.recentSearch = this.commonService.getDataFromCookies('search_history')
     this.searchText = this.searchForm.value.searchText;
     this.getPhotos(this.searchText, this.pageNumber, this.perPage);
   }
 
+  // When user Click on the recent search chips, make call again to FLickr API
   recentSearchs(search) {
     this.photos = [];
+    this.pageNumber = 1;
+    this.searchText  = search;
     this.getPhotos(search, this.pageNumber, this.perPage);
   }
 
+  // Remove recent search from Cookies
   remove(text) {
     this.recentSearch =  this.commonService.removeDataFromCookies(text);
   }
 
+  // Function which makes call to WebService function, which returns data from the Flickr API
   getPhotos(searchText, pageNumber, perPage) {
+      if (!searchText) {
+        return;
+      }
       this.waitLoader = true;
       const requestData = {
         'search_text' : searchText,
@@ -60,7 +72,7 @@ export class HomeComponent implements OnInit {
       };
       this.webServices.getFlickerPhotos(requestData).subscribe(response => {
         this.waitLoader = false
-        let parsedPhotos = this.dataParser.prasePhotos(response);
+        const parsedPhotos = this.dataParser.prasePhotos(response);
         parsedPhotos.forEach((photo) => {
           this.photos.push(photo);
         });
@@ -69,11 +81,14 @@ export class HomeComponent implements OnInit {
 
   }
 
+  // This function get called when User scrolls to end of the page,
+  // Pagenumber is incremented by when, which is then passed as API param to fetch data from the next page
   onScroll() {
     this.pageNumber++;
     this.getPhotos(this.searchText, this.pageNumber, this.perPage);
   }
 
+  // When we tap on photo, bootsrap modal open with image title and description
   getPhotoInfo(photo, e) {
     const modalRef = this.modalService.open(PhotoDetailsComponent, { size: 'lg', centered: true });
     modalRef.componentInstance.photo = photo;

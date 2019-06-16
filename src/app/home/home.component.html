@@ -28,11 +28,13 @@
     <form (ngSubmit)="search()" [formGroup]="searchForm">
 
       <br>
-      <input  class="input-field" formControlName="searchText" placeholder="Search">
+      <input  class="input-field" formControlName="searchText" placeholder="Search"><button class="search-btn"></button>
+
       <!--<datalist id="search">-->
       <!--<option *ngFor="let search of recentSearch" value={{search}}>-->
       <!--</datalist>-->
     </form>
+
   </div>
 
   <div class="">
